@@ -53,6 +53,7 @@ export function ClaimUsernameForm() {
           customClass="w-44"
           placeholder="seu-usuario"
           register={register('username')}
+          autoFocus={true}
         />
 
         <Button

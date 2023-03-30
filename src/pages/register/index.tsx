@@ -2,7 +2,9 @@ import { Button } from '@/components/Button'
 import { Form } from '@/components/Form'
 import { Input } from '@/components/Input'
 import { MultiStep } from '@/components/MultiStep'
+import { api } from '@/lib/axios'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { AxiosError } from 'axios'
 import { useRouter } from 'next/router'
 import { ArrowRight } from 'phosphor-react'
 import { useEffect } from 'react'
@@ -44,7 +46,21 @@ export default function Register() {
   }, [router.query?.username, setValue])
 
   async function handleRegister(data: RegisterFormData) {
-    console.log(data)
+    try {
+      await api.post('/users', {
+        name: data.name,
+        username: data.username,
+      })
+
+      await router.push('/register/connect-calendar')
+    } catch (err) {
+      if (err instanceof AxiosError && err?.response?.data?.message) {
+        alert(err.response.data.message)
+        return
+      }
+
+      console.log(err)
+    }
   }
 
   return (
@@ -52,13 +68,13 @@ export default function Register() {
       <div className="px-6 base">
         <div className="p-5">
           <strong className="text-xl">Bem-vindo(a) ao Ignite Call!</strong>
-          <p className="text-neutral-400 mt-2 mb-6">
+          <p className="text-neutral-400 mt-2 mb-5 text-sm">
             Precisamos de algumas informações para criar seu perfil! Ah, você
             pode editar essas informações mais tarde se precisar.
           </p>
-        </div>
 
-        <MultiStep size={4} currentStep={1} />
+          <MultiStep size={4} currentStep={1} />
+        </div>
 
         <Form classname="flex-col" onSubmit={handleSubmit(handleRegister)}>
           <Input
@@ -71,6 +87,7 @@ export default function Register() {
             label="Nome completo"
             register={register('name')}
             error={errors.name?.message}
+            autoFocus={true}
           />
 
           <Button

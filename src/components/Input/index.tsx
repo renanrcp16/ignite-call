@@ -23,7 +23,7 @@ export function Input({
         {prefix ? <span className="text-neutral-500">{prefix}</span> : false}
         <input
           type={props.type ? props.type : 'text'}
-          className={`bg-transparent py-2 outline-none placeholder:text-neutral-600 ${customClass}`}
+          className={`bg-transparent py-2 outline-none placeholder:text-neutral-600 h-10 ${customClass}`}
           {...register}
           {...props}
         />

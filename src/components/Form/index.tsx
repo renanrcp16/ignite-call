@@ -1,7 +1,7 @@
 import { HTMLProps } from 'react'
 
 interface FormProps extends HTMLProps<HTMLFormElement> {
-  classname: string
+  classname?: string
 }
 
 export function Form({ classname, ...props }: FormProps) {
