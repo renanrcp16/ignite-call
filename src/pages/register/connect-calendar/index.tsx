@@ -1,10 +1,22 @@
 import { Button } from '@/components/Button'
 import { Form } from '@/components/Form'
 import { MultiStep } from '@/components/MultiStep'
-import { signIn } from 'next-auth/react'
-import { ArrowRight } from 'phosphor-react'
+import { signIn, useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
+import { ArrowRight, Check } from 'phosphor-react'
+import { MouseEvent } from 'react'
 
 export default function ConnectCalendar() {
+  const session = useSession()
+  const router = useRouter()
+
+  const hasAuthError = !!router.query.error
+  const isSignedIn = session.status === 'authenticated'
+
+  async function handleConnectCalendar(e: MouseEvent<HTMLElement>) {
+    e.preventDefault()
+    await signIn('google')
+  }
   //   async function handleRegister(data: any) {}
 
   return (
@@ -22,24 +34,41 @@ export default function ConnectCalendar() {
         <Form classname="flex-col">
           <div className="p-5 flex justify-between items-center border border-neutral-700 rounded-lg">
             <span>Google Calendar</span>
-            <button
-              onClick={(e) => {
-                e.preventDefault()
-                signIn('google')
-              }}
-              className="text-sm flex items-center justify-center py-2 px-3 rounded-md 
+            {isSignedIn ? (
+              <button
+                disabled={true}
+                className="text-sm flex items-center justify-center py-2 px-3 rounded-md 
+					outline outline-2 outline-teal-700 
+					hover:bg-teal-700 focus:outline disabled:bg-teal-700 disabled:opacity-70 h-10 w-32"
+              >
+                Conectado
+                <Check className="ml-1" />
+              </button>
+            ) : (
+              <button
+                onClick={handleConnectCalendar}
+                className="text-sm flex items-center justify-center py-2 px-3 rounded-md 
 					outline outline-2 outline-teal-700 
 					hover:bg-teal-700 focus:outline disabled:opacity-50 h-10 w-32"
-            >
-              Conectar
-              <ArrowRight className="mx-2" />
-            </button>
+              >
+                Conectar
+                <ArrowRight className="ml-1" />
+              </button>
+            )}
           </div>
+          {hasAuthError && !isSignedIn ? (
+            <p className="text-xs text-red-400">
+              Falha ao se conectar com o Google. Verifique se você habilitou as
+              permissões de acesso ao Google Calendar.
+            </p>
+          ) : (
+            false
+          )}
           <Button
             type="submit"
             label="Próximo passo"
-            icon={<ArrowRight className="mx-2" />}
-            // disabled={isSubmitting}
+            icon={<ArrowRight className="ml-1" />}
+            disabled={!isSignedIn}
             classname="mt-1"
           />
         </Form>
