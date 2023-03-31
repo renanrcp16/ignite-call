@@ -39,7 +39,7 @@ export default function ConnectCalendar() {
                 disabled={true}
                 className="text-sm flex items-center justify-center py-2 px-3 rounded-md 
 					outline outline-2 outline-teal-700 
-					hover:bg-teal-700 focus:outline disabled:bg-teal-700 disabled:opacity-70 h-10 w-32"
+					hover:bg-teal-700 focus:outline disabled:bg-teal-700 disabled:opacity-40 h-10 w-32"
               >
                 Conectado
                 <Check className="ml-1" />
@@ -49,7 +49,7 @@ export default function ConnectCalendar() {
                 onClick={handleConnectCalendar}
                 className="text-sm flex items-center justify-center py-2 px-3 rounded-md 
 					outline outline-2 outline-teal-700 
-					hover:bg-teal-700 focus:outline disabled:opacity-50 h-10 w-32"
+					hover:bg-teal-700 focus:outline disabled:opacity-40 h-10 w-32"
               >
                 Conectar
                 <ArrowRight className="ml-1" />
@@ -69,7 +69,6 @@ export default function ConnectCalendar() {
             label="Próximo passo"
             icon={<ArrowRight className="ml-1" />}
             disabled={!isSignedIn}
-            classname="mt-1"
           />
         </Form>
       </div>

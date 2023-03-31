@@ -50,7 +50,7 @@ export function ClaimUsernameForm() {
 
         <Input
           prefix="ignite.com/"
-          customClass="w-44"
+          classname="w-40"
           placeholder="seu-usuario"
           register={register('username')}
           autoFocus={true}
@@ -61,6 +61,7 @@ export function ClaimUsernameForm() {
           label="Reservar"
           icon={<ArrowRight className="mx-2" />}
           disabled={isSubmitting}
+          classname={'flex-1'}
         />
       </Form>
       <div className="mt-2 text-neutral-400 text-sm fixed">

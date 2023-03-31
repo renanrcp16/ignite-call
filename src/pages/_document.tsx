@@ -22,7 +22,7 @@ export default function Document() {
           dangerouslySetInnerHTML={{ __html: getCssText() }}
         />
       </Head>
-      <body className="bg-neutral-900 text-white overflow-hidden">
+      <body className="bg-neutral-900 text-white overflow-hidden overflow-y-auto">
         <Main />
         <NextScript />
       </body>

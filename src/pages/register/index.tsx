@@ -95,7 +95,6 @@ export default function Register() {
             label="Próximo passo"
             icon={<ArrowRight className="mx-2" />}
             disabled={isSubmitting}
-            classname="mt-2"
           />
         </Form>
       </div>

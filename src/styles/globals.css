@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+input::-webkit-calendar-picker-indicator {
+	filter: invert(100%) brightness(50%)
+}
+
+*::selection {
+	background-color: #0f766e;
+}

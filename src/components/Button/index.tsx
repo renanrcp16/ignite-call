@@ -12,7 +12,7 @@ export function Button({ label, icon, classname, ...props }: ButtonProps) {
       className={`
 	  	text-sm flex items-center justify-center py-2 px-3 rounded-md 
 		bg-teal-700 [%>not]:hover:bg-teal-600 focus:outline outline-2 
-		outline-teal-900 disabled:opacity-50 h-10
+		outline-teal-900 disabled:opacity-40 h-10
 		${classname}
 	`}
       {...props}
